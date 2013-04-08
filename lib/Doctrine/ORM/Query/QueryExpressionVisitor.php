@@ -154,6 +154,10 @@ class QueryExpressionVisitor extends ExpressionVisitor
                 $this->parameters[] = $parameter;
                 return $this->expr->neq($comparison->getField(), $placeholder);
 
+            case Comparison::CONTAINS:
+                $this->parameters[] = $parameter;
+                return $this->expr->like($comparison->getField(), $placeholder);
+
             default:
                 $operator = self::convertComparisonOperator($comparison->getOperator());
                 if ($operator) {
